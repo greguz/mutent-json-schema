@@ -30,17 +30,17 @@
   "author": "Giacomo Gregoletto",
   "license": "MIT",
   "dependencies": {
-    "ajv": "^8.6.3"
+    "ajv": "^8.10.0"
   },
   "peerDependencies": {
     "mutent": "5.0.0-9"
   },
   "devDependencies": {
-    "ava": "4.0.0-alpha.2",
-    "c8": "^7.10.0",
+    "ava": "4.0.1",
+    "c8": "^7.11.0",
     "fluent-json-schema": "^3.0.1",
     "mutent": "5.0.0-9",
-    "rollup": "^2.58.0",
+    "rollup": "^2.68.0",
     "standard": "^16.0.4"
   },
   "repository": {
