@@ -1,5 +1,7 @@
 # mutent-json-schema
 
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
 ```javascript
 import { Store } from 'mutent'
 import { mutentJsonSchema } from 'mutent-json-schema'
