@@ -38,11 +38,7 @@ export function mutentJsonSchema (options) {
 
   return {
     hooks: {
-      onEntity (entity, context) {
-        if (context.intent === 'CREATE') {
-          return hook(entity, context)
-        }
-      },
+      onEntity: hook,
       beforeCreate: hook,
       beforeUpdate: hook
     }
