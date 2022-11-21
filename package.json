@@ -1,14 +1,15 @@
 {
   "name": "mutent-json-schema",
   "version": "0.2.0",
-  "description": "JSON Schema validation plugin for Mutent",
+  "description": "JSON Schema validation plugin for Mutent based on Ajv.",
   "type": "module",
   "main": "./mutent-json-schema.cjs",
+  "types": "./mutent-json-schema.d.ts",
   "exports": {
     "import": "./mutent-json-schema.mjs",
-    "require": "./mutent-json-schema.cjs"
+    "require": "./mutent-json-schema.cjs",
+    "types": "./mutent-json-schema.d.ts"
   },
-  "types": "./mutent-json-schema.d.ts",
   "files": [
     "mutent-json-schema.cjs",
     "mutent-json-schema.mjs",
@@ -16,7 +17,7 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "lint": "standard --fix **/*.mjs",
+    "lint": "standard **/*.mjs",
     "test": "c8 -r text -r html -x **/*.spec.mjs ava",
     "prepublishOnly": "npm run lint && npm run build && npm run test"
   },
@@ -30,18 +31,18 @@
   "author": "Giacomo Gregoletto",
   "license": "MIT",
   "dependencies": {
-    "ajv": "^8.10.0"
+    "ajv": "^8.11.2"
   },
   "peerDependencies": {
-    "mutent": "5.0.0-9"
+    "mutent": "^5.0.0"
   },
   "devDependencies": {
-    "ava": "4.0.1",
-    "c8": "^7.11.0",
-    "fluent-json-schema": "^3.0.1",
-    "mutent": "5.0.0-9",
-    "rollup": "^2.68.0",
-    "standard": "^16.0.4"
+    "ava": "^5.1.0",
+    "c8": "^7.12.0",
+    "fluent-json-schema": "^4.0.0",
+    "mutent": "^5.0.0",
+    "rollup": "^3.3.0",
+    "standard": "^17.0.0"
   },
   "repository": {
     "type": "git",
