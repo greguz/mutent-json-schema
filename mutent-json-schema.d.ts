@@ -2,7 +2,7 @@
 /// <reference types="mutent" />
 
 import type { default as Ajv, Options as AjvOptions } from "ajv";
-import type { PluginOptions } from "mutent";
+import type { MutentOptions } from "mutent";
 
 export interface MutentJsonSchemaOptions {
   /**
@@ -16,9 +16,11 @@ export interface MutentJsonSchemaOptions {
   /**
    * JSON Schema definition.
    */
-  schema: any;
+  schema: Record<string, any>;
 }
 
-export declare function mutentJsonSchema(
+declare function mutentJsonSchema(
   options: MutentJsonSchemaOptions
-): PluginOptions<{ adapter: any; entity: any; options: any; query: any }>;
+): MutentOptions<{ adapter: any; entity: any; options: any; query: any }>;
+
+export default mutentJsonSchema;

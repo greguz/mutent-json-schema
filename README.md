@@ -19,7 +19,7 @@ npm i mutent-json-schema
 
 Returns a new Mutent's Plugin that enforces a JSON Schema to all Entities.
 
-- `options` `<Object>` 
+- `options` `<Object>`
 - `[options.ajv]` `<Ajv>` A customized instance of [Ajv](https://ajv.js.org/). Optional.
 - `[options.ajvOptions]` `<Object>` Custom [options](https://ajv.js.org/options.html) for the Ajv constructor function. Optional defaults are documented below.
 - `options.schema` `<*>` The required JSON Schema to enforce. Schemas generated with [`fluent-json-schema`](https://github.com/fastify/fluent-json-schema) are also supported.
@@ -48,9 +48,9 @@ You can access the raw Ajv-generated errors, and the Entity that has generated t
 ## Example
 
 ```javascript
-import { Store } from 'mutent'
-import { ArrayAdapter } from 'mutent-array'
-import { mutentJsonSchema } from 'mutent-json-schema'
+import { MutentError, Store } from 'mutent'
+import ArrayAdapter from 'mutent-array'
+import mutentJsonSchema from 'mutent-json-schema'
 
 const store = new Store({
   adapter: new ArrayAdapter(),
@@ -73,22 +73,32 @@ const store = new Store({
   ]
 })
 
-async function foo () {
-  try {
-    await store.create({}).unwrap()
-  } catch (err) {
-    console.error(err)
-    // err.code will be 'EMUT_INVALID_ENTITY'
-    // err.info.data will contain the data that triggered the error
-    // err.info.errors will contain Ajv errors
-  }
-  
-  await store.create({ id: 'my_entity', value: 42 }).unwrap()
+try {
+  await store.create({ value: 7 }).unwrap()
+} catch (err) {
+  // Handle mutent-json-schema error
+  if (err instanceof MutentError && err.code === 'EMUT_INVALID_ENTITY') {
+    // Invalid data: { value: 7 }
+    console.error('Invalid data:', err.info.data)
 
-  console.log(store.adapter.items) // [ { id: 'my_entity', value: 42 } ]
+    // Schema errors: [
+    //   {
+    //     instancePath: '',
+    //     schemaPath: '#/required',
+    //     keyword: 'required',
+    //     params: { missingProperty: 'id' },
+    //     message: "must have required property 'id'"
+    //   }
+    // ]
+    console.error('Schema errors:', err.info.errors)
+  } else {
+    throw err
+  }
 }
 
-foo()
+await store.create({ id: 'my_entity', value: 42 }).unwrap()
+
+console.log(store.raw) // [ { id: 'my_entity', value: 42 } ]
 ```
 
 ## License

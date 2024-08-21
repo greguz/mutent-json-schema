@@ -1,5 +1,5 @@
 import Ajv from 'ajv'
-import { MutentError } from 'mutent'
+import { MutentError, getAdapterName } from 'mutent'
 
 function getAjvInstance (options) {
   if (options.ajv) {
@@ -14,16 +14,7 @@ function getAjvInstance (options) {
   })
 }
 
-/**
- * TODO: use Mutent's exported function (future versions)
- */
-function getAdapterName (adapter) {
-  return typeof adapter === 'object' && adapter !== null
-    ? adapter[Symbol.for('adapter-name')] || adapter.constructor.name
-    : 'Unknown Adapter'
-}
-
-export function mutentJsonSchema (options) {
+export default function mutentJsonSchema (options) {
   const ajv = getAjvInstance(options)
 
   const validate = ajv.compile(options.schema.valueOf())

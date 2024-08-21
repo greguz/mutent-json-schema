@@ -2,7 +2,7 @@ import test from 'ava'
 import S from 'fluent-json-schema'
 import { Store } from 'mutent'
 
-import { mutentJsonSchema } from './mutent-json-schema.mjs'
+import mutentJsonSchema from './mutent-json-schema.mjs'
 
 test('fluent-json-schema', async t => {
   const store = new Store({
